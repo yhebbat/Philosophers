@@ -6,22 +6,24 @@
 
 typedef struct s_args
 {
-	int	number_philo;
-	int	time_die;
-	int	time_eat;
-	int time_sleep;
-	int	num_meal;
+	long	number_philo;
+	long	time_die;
+	long	time_eat;
+	long	time_sleep;
+	long	num_meal;
+	int		done;
+	struct t_philo *philo;
+	pthread_mutex_t *forks;
+	pthread_mutex_t write;
 }t_args;
 
 typedef struct s_philo
 {
+	pthread_t id;
 	int	philo_id;
-	int left_f;
-	int right_f;
-}t_philo;
-
-typedef struct s_both
-{
+	pthread_mutex_t eat;
+	unsigned long long last_time_eat;
+	int is_eating;
+	int nb_of_meals;
 	t_args *args;
-	t_philo *philo;
-}t_both;
+}t_philo;
