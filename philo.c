@@ -45,6 +45,9 @@ int		is_good_to_parse(char **av)
 
 int		parsing(int ac, char **av, t_args *args)
 {
+	int i;
+
+	i = -1;
 	if (is_good_to_parse(av))
 	{
 		args->number_philo = ft_atoi(av[1]);
@@ -56,6 +59,8 @@ int		parsing(int ac, char **av, t_args *args)
 		else
 			args->num_meal = -1;
 	}
+	while (++i < args->number_philo)
+		pthread_mutex_init(&args->forks[i], NULL);
 	return (is_good_to_parse(av));
 }
 
@@ -64,6 +69,42 @@ void	ft_exit(t_args *args)
 	write(1,"arguments are not valid\n",24);
 	free(args);
 	exit(0);
+}
+
+void	ft_lock_forks(t_philo *philo)
+{
+	int i;
+
+	i = 0;
+	while (i < philo->args->number_philo)
+	{
+		if (i % 2)
+		{
+			if(pthread_mutex_lock(&philo->args->forks[i]))
+				printf("error\n");
+		}
+		i++;
+	}
+}
+
+void	routine(void	*param)
+{
+	t_philo		*philo;
+
+	philo = (t_philo *)param;
+	ft_lock_forks(philo);
+}
+
+void	create_create(t_philo *philo, t_args *args)
+{
+	int i;
+
+	i = -1;
+	while (++i < args->number_philo)
+	{
+		if (pthread_create(&philo[i].id, NULL, routine, &philo[i]))
+            printf("error\n");
+	}
 }
 
 int main(int ac, char **av)
@@ -79,9 +120,9 @@ int main(int ac, char **av)
 		if (!parsing(ac, av, args))
 			ft_exit(args);
 		philo = malloc(sizeof(t_philo) * args->number_philo);
+		create_create(philo, args);
     }
     else
        printf("this project take five or six arguments\n");
-
     return (0);
 }
