@@ -43,11 +43,19 @@ int		is_good_to_parse(char **av)
 	return (1);
 }
 
-int		parsing(int ac, char **av, t_args *args)
+void	init_mutex(t_args *args)
 {
 	int i;
 
 	i = -1;
+	args->forks = malloc(args->number_philo * sizeof(pthread_mutex_t));
+	while (++i < args->number_philo)
+		pthread_mutex_init(&args->forks[i], NULL);
+	pthread_mutex_init(&args->write, NULL);
+}
+
+int		parsing(int ac, char **av, t_args *args)
+{
 	if (is_good_to_parse(av))
 	{
 		args->number_philo = ft_atoi(av[1]);
@@ -59,8 +67,6 @@ int		parsing(int ac, char **av, t_args *args)
 		else
 			args->num_meal = -1;
 	}
-	while (++i < args->number_philo)
-		pthread_mutex_init(&args->forks[i], NULL);
 	return (is_good_to_parse(av));
 }
 
@@ -71,39 +77,46 @@ void	ft_exit(t_args *args)
 	exit(0);
 }
 
-void	ft_lock_forks(t_philo *philo)
-{
-	int i;
+// void	ft_lock_forks(t_philo *philo)
+// {
+// 	int left;
+// 	int right;
 
-	i = 0;
-	while (i < philo->args->number_philo)
-	{
-		if (i % 2)
-		{
-			if(pthread_mutex_lock(&philo->args->forks[i]))
-				printf("error\n");
-		}
-		i++;
-	}
-}
+// 	if (philo->philo_id % 2)
+// 		left =  philo->philo_id;
+// 	else
+// 		left = (philo->philo_id + 1) % (philo->args->number_philo);
+// 	if (philo->philo_id % 2 == 0)
+// 		right =  philo->philo_id;
+// 	else
+// 		right = (philo->philo_id + 1) % (philo->args->number_philo);
+// 	pthread_mutex_lock(&philo->args->forks[left]);
+// 	pthread_mutex_lock(&philo->args->forks[right]);
+// }
 
-void	routine(void	*param)
+void	*work(void	*param)
 {
 	t_philo		*philo;
 
 	philo = (t_philo *)param;
-	ft_lock_forks(philo);
+	while (1)
+	{	
+		ft_lock_forks(philo);
+		
+	}
 }
 
-void	create_create(t_philo *philo, t_args *args)
+void	start(t_philo *philo, t_args *args)
 {
-	int i;
+	int	i;
 
-	i = -1;
-	while (++i < args->number_philo)
+	i = 0;
+
+	while (i < args->number_philo)
 	{
-		if (pthread_create(&philo[i].id, NULL, routine, &philo[i]))
-            printf("error\n");
+		if (pthread_create(&philo[i].id, NULL, work, &philo[i]))
+			printf("error\n");
+		i++;
 	}
 }
 
@@ -119,8 +132,9 @@ int main(int ac, char **av)
 		args = malloc(sizeof(t_args));
 		if (!parsing(ac, av, args))
 			ft_exit(args);
+		init_mutex(args);
 		philo = malloc(sizeof(t_philo) * args->number_philo);
-		create_create(philo, args);
+		start(philo, args);
     }
     else
        printf("this project take five or six arguments\n");
