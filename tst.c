@@ -120,12 +120,12 @@ unsigned long long current_time()
 
 void sleepu(unsigned long long end)
 {
-    // unsigned long long end;
-
     // end = current_time() + time;
     while (current_time() < end)
         usleep(10);
 }
+
+
 void stop_simulation(t_philo *philo)
 {
     int i;
