@@ -7,6 +7,28 @@ void	ft_exit(t_args *args)
 	exit(0);
 }
 
+// void	diedie(t_args *args ,t_philo *philo)
+// {
+// 	int i;
+
+// 	while (args->num_meal != 0)
+// 	{
+// 		i = 0;
+// 		while (i < args->number_philo)
+// 		{
+// 			pthread_mutex_lock(&args->is_eating);
+// 			if (philo[i].eat == 0 && time_passed(philo[i].last_time_eat) > (unsigned long long)args->time_eat)
+// 			{
+// 				print(&philo[i], DIE, time_passed(philo[i].start));
+// 				break ;
+// 			}
+// 			pthread_mutex_unlock(&args->is_eating);
+// 			i++;
+// 		}	
+// 	}
+	
+// }
+
 void	start(t_args *args)
 {
 	int	i;
@@ -23,6 +45,7 @@ void	start(t_args *args)
 		usleep(100);
 		i++;
 	}
+	// diedie(args, philo);
 	pthread_join((philo[0].tr), NULL);
 }
 
