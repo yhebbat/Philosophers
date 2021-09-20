@@ -70,13 +70,11 @@ void	*work(void	*philostruct)
 	if (philo == NULL || philo->args->num_meal == 0)
 		return (NULL);
 	philo->last_time_eat = time_now();
-	// sleepu(philo->start + (5 * philo->args->number_philo));
-	// philo->last_time_eat += (5 * philo->args->number_philo);
 	philo->start = philo->last_time_eat;
 	while (1)
 	{
 		if (philo->philo_id % 2 == 0)
-		right = (philo->philo_id + 1) % (philo->args->number_philo);
+			right = (philo->philo_id + 1) % (philo->args->number_philo);
 		else
 			right = philo->philo_id;
 		if (philo->philo_id % 2 == 0)
@@ -104,5 +102,4 @@ void	*work(void	*philostruct)
 		ft_sleep(philo);
 		think(philo);
 	}
-	
 }

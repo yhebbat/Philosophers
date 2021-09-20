@@ -23,6 +23,7 @@ void	start(t_args *args)
 		usleep(100);
 		i++;
 	}
+	pthread_join((philo[0].tr), NULL);
 }
 
 int main(int ac, char **av)
@@ -41,6 +42,8 @@ int main(int ac, char **av)
     }
     else
        printf("this project take five or six arguments\n");
+	// printf("%ld\n", args->number_philo);
+	
 	// free(args);
     return (0);
 }

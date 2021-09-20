@@ -45,7 +45,7 @@ t_philo *init_philo(t_args *args)
 	while (++i < args->number_philo)
 	{
 		philo[i].args = args;
-		philo[i].philo_id = i + 1;
+		philo[i].philo_id = i;
 		philo[i].nb_of_meals = args->num_meal;
 		philo[i].eat = 0;
 		philo[i].start = 0;
