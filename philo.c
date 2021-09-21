@@ -7,27 +7,27 @@ void	ft_exit(t_args *args)
 	exit(0);
 }
 
-// void	diedie(t_args *args ,t_philo *philo)
-// {
-// 	int i;
+void	diedie(t_args *args ,t_philo *philo)
+{
+	int i;
 
-// 	while (args->num_meal != 0)
-// 	{
-// 		i = 0;
-// 		while (i < args->number_philo)
-// 		{
-// 			pthread_mutex_lock(&args->is_eating);
-// 			if (philo[i].eat == 0 && time_passed(philo[i].last_time_eat) > (unsigned long long)args->time_eat)
-// 			{
-// 				print(&philo[i], DIE, time_passed(philo[i].start));
-// 				break ;
-// 			}
-// 			pthread_mutex_unlock(&args->is_eating);
-// 			i++;
-// 		}	
-// 	}
+	while (args->num_meal != 0  /*&& (philo->nb_of_meals > 0 || args->num_meal == -1)*/)
+	{
+		i = 0;
+		while (i < args->number_philo && !philo->eat)
+		{
+			pthread_mutex_lock(&args->is_eating);
+			if (philo[i].eat == 0 && time_passed(philo[i].last_time_eat) > (unsigned long long)args->time_die)
+			{
+				print(&philo[i], DIE, time_passed(philo[i].start));
+				break ;
+			}
+			pthread_mutex_unlock(&args->is_eating);
+			i++;
+		}	
+	}
 	
-// }
+}
 
 void	start(t_args *args)
 {
@@ -45,17 +45,15 @@ void	start(t_args *args)
 		usleep(100);
 		i++;
 	}
-	// diedie(args, philo);
-	pthread_join((philo[0].tr), NULL);
+	diedie(args, philo);
+	// pthread_join((philo[0].tr), NULL);
 }
 
 int main(int ac, char **av)
 {
 	t_args *args;
-	// t_philo *philo;
 
 	args = NULL;
-	// philo = NULL;
     if (ac == 5 || ac == 6)
     {
 		args = malloc(sizeof(t_args));
@@ -65,8 +63,5 @@ int main(int ac, char **av)
     }
     else
        printf("this project take five or six arguments\n");
-	// printf("%ld\n", args->number_philo);
-	
-	// free(args);
     return (0);
 }
