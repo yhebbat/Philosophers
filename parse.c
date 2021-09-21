@@ -1,5 +1,26 @@
 #include "philo.h"
 
+int		is_good_to_parse(char **av)
+{
+	int i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	while (av[i])
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if(av[i][j] > '9' || av[i][j] < '0' || ft_strlen(av[i]) > 10)
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int		parsing(int ac, char **av, t_args *args)
 {
 	if (is_good_to_parse(av))

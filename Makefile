@@ -3,7 +3,7 @@
 NAME = philo
 
 SRC =	philo.c functions_from_libft.c  \
-		initialization.c parse.c   \
+		initialization.c parse.c	destiny.c\
 		print_fun.c  time.c work.c
 #SRC_BONUS =	checker.c get_next_line.c get_next_line_utils.c pile.c \
 			operations.c to_check.c utils.c free.c

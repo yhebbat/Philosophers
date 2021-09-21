@@ -61,3 +61,5 @@ t_philo *init_philo(t_args *args);
 
 int	ft_atoi(const char *str);
 int		ft_strlen(char *str);
+
+void	destiny(t_args *args ,t_philo *philo);
