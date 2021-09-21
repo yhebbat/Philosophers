@@ -7,26 +7,71 @@ void	ft_exit(t_args *args)
 	exit(0);
 }
 
+// void	ft_free(t_args *args, t_philo *philo)
+// {
+// 	int i;
+
+// 	if (args != NULL && philo != NULL)
+// 	{
+// 		i = 0;
+// 		while (i < args->number_philo)
+// 		{
+// 			printf("sss\n");
+// 			free(args->forks[i]);
+// 			free(&philo[i]);
+// 			i++;
+// 		}
+// 		free(philo);
+// 		free(args);
+// 	}
+// }
+
+int		ft_checkmeals(t_args *args, t_philo *philo)
+{
+	if (args->num_meal != -1)
+	{
+		if (args->num_meal == 0)
+		{
+			print(philo, DIE, 0);
+			return (1);
+		}
+		if (philo->nb_of_meals == 0 && philo->eat == 0)
+		{
+			print(philo, DIE, time_passed(philo->start));
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	diedie(t_args *args ,t_philo *philo)
 {
 	int i;
+	int k;
 
-	while (args->num_meal != 0  /*&& (philo->nb_of_meals > 0 || args->num_meal == -1)*/)
+	k = 1;
+	while (k)
 	{
 		i = 0;
 		while (i < args->number_philo && !philo->eat)
 		{
 			pthread_mutex_lock(&args->is_eating);
-			if (philo[i].eat == 0 && time_passed(philo[i].last_time_eat) > (unsigned long long)args->time_die)
+			if (ft_checkmeals(args, &philo[i]))
+			{
+				k = 0;
+				break ;	
+			}
+			if (philo[i].eat == 0 &&
+				time_passed(philo[i].last_time_eat) > (unsigned long long)args->time_die)
 			{
 				print(&philo[i], DIE, time_passed(philo[i].start));
+				k = 0;
 				break ;
 			}
 			pthread_mutex_unlock(&args->is_eating);
 			i++;
 		}	
 	}
-	
 }
 
 void	start(t_args *args)
@@ -46,7 +91,7 @@ void	start(t_args *args)
 		i++;
 	}
 	diedie(args, philo);
-	// pthread_join((philo[0].tr), NULL);
+	// ft_free(args, philo);
 }
 
 int main(int ac, char **av)
