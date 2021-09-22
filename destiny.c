@@ -11,7 +11,7 @@ int		ft_checkmeals(t_args *args, t_philo *philo)
 		}
 		if (philo->nb_of_meals == 0 && philo->eat == 0)
 		{
-			print(philo, DIE, time_passed(philo->start));
+		//	print(philo, DIE, time_passed(philo->start));
 			return (1);
 		}
 	}
