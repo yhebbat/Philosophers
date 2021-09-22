@@ -44,6 +44,6 @@ void	destiny(t_args *args ,t_philo *philo)
 			}
 			pthread_mutex_unlock(&args->is_eating);
 			i++;
-		}	
+		}
 	}
 }

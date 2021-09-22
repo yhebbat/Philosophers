@@ -7,24 +7,22 @@ void	ft_exit(t_args *args)
 	exit(0);
 }
 
-// void	ft_free(t_args *args, t_philo *philo)
-// {
-// 	int i;
+void	ft_free(t_args *args, t_philo *philo)
+{
+	int i;
 
-// 	if (args != NULL && philo != NULL)
-// 	{
-// 		i = 0;
-// 		while (i < args->number_philo)
-// 		{
-// 			printf("sss\n");
-// 			free(args->forks[i]);
-// 			free(&philo[i]);
-// 			i++;
-// 		}
-// 		free(philo);
-// 		free(args);
-// 	}
-// }
+	if (args != NULL && philo != NULL)
+	{
+		i = 0;
+		while (i < args->number_philo)
+		{
+			pthread_mutex_destroy(&args->forks[i]);
+			i++;
+		}
+		free(philo);
+		free(args);
+	}
+}
 
 void	start(t_args *args)
 {
@@ -43,7 +41,7 @@ void	start(t_args *args)
 		i++;
 	}
 	destiny(args, philo);
-	// ft_free(args, philo);
+	ft_free(args, philo);
 }
 
 int main(int ac, char **av)
