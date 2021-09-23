@@ -4,11 +4,16 @@ int	ft_checkmeals(t_args *args, t_philo *philo, int *k)
 {
 	if (args->num_meal != -1)
 	{
-		k = 0;
 		if (args->num_meal == 0)
+		{
+			*k = 0;
 			return (1);
-		if (philo->nb_of_meals == 0 && philo->eat == 0)
+		}
+		if (philo->nb_of_meals == args->num_meal && philo->eat == 0)
+		{
+			*k = 0;
 			return (1);
+		}
 	}
 	return (0);
 }

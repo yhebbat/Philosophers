@@ -25,6 +25,7 @@ int	parsing(int ac, char **av, t_args *args)
 {
 	if (is_good_to_parse(av))
 	{
+		// args->all = 0;
 		args->number_philo = ft_atoi(av[1]);
 		args->time_die = ft_atoi(av[2]);
 		args->time_eat = ft_atoi(av[3]);

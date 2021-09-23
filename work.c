@@ -11,8 +11,9 @@ void	eat_helper(t_philo *philo)
 	sleepu(philo->last_time_eat + philo->args->time_eat);
 	pthread_mutex_lock(&philo->args->is_eating);
 	philo->eat = 0;
-	if (philo->nb_of_meals > 0)
-		philo->nb_of_meals--;
+	philo->nb_of_meals++;
+	// if (philo->nb_of_meals == philo->args->number_philo)
+	// 	philo->args->all++;
 	pthread_mutex_unlock(&philo->args->is_eating);
 }
 
@@ -60,8 +61,8 @@ void	*work(void	*philostruct)
 	philo = (t_philo *)philostruct;
 	if (philo == NULL || philo->args->num_meal == 0)
 		return (NULL);
-	philo->last_time_eat = time_now();
-	philo->start = philo->last_time_eat;
+	//philo->last_time_eat = time_now();
+	//philo->start = philo->last_time_eat;
 	while (1)
 	{
 		eat(philo);
