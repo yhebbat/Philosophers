@@ -10,7 +10,6 @@ void	eat_helper(t_philo *philo)
 	usleep((philo->args->time_eat * 1000) - 10000);
 	sleepu(philo->last_time_eat + philo->args->time_eat);
 	pthread_mutex_lock(&philo->args->is_eating);
-	philo->last_time_eat = time_now();
 	philo->eat = 0;
 	if (philo->nb_of_meals > 0)
 		philo->nb_of_meals--;
@@ -19,8 +18,8 @@ void	eat_helper(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	int right;
-	int left;
+	int	right;
+	int	left;
 
 	if (philo->philo_id % 2 == 0)
 		right = (philo->philo_id + 1) % (philo->args->number_philo);
@@ -41,7 +40,7 @@ void	eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
-	unsigned long long before_sleep;
+	unsigned long long	before_sleep;
 
 	before_sleep = time_now();
 	print(philo, SLEEP, time_passed(philo->start));
@@ -56,7 +55,7 @@ void	think(t_philo *philo)
 
 void	*work(void	*philostruct)
 {
-	t_philo		*philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)philostruct;
 	if (philo == NULL || philo->args->num_meal == 0)

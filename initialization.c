@@ -2,7 +2,7 @@
 
 void	init_mutex(t_args *args)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	args->forks = malloc(args->number_philo * sizeof(pthread_mutex_t));
@@ -12,7 +12,7 @@ void	init_mutex(t_args *args)
 	pthread_mutex_init(&args->is_eating, NULL);
 }
 
-t_philo *init_philo(t_args *args)
+t_philo	*init_philo(t_args *args)
 {
 	t_philo	*philo;
 	int		i;

@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int		print(t_philo *philo, int to_write, unsigned long long time_ms)
+int	print(t_philo *philo, int to_write, unsigned long long time_ms)
 {
 	if (pthread_mutex_lock(&philo->args->write))
 		return (1);

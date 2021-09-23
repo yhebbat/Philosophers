@@ -13,7 +13,7 @@ OBJECT = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME):
-	@gcc -Wall -Wextra -Werror $(SRC) -o $(NAME) -pthread
+	@gcc -Wall -Wextra -Werror $(SRC) -o $(NAME) -pthread -g -fsanitize=address
 	@echo "✅✅✅"
 
 #bonus:

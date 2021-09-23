@@ -1,6 +1,6 @@
 #include "philo.h"
 
-unsigned long long	time_passed(unsigned long long start)
+unsigned long long	time_passed(unsigned long long	start)
 {
 	struct timeval	end;
 
@@ -8,16 +8,16 @@ unsigned long long	time_passed(unsigned long long start)
 	return (((end.tv_sec * 1000) + (end.tv_usec / 1000)) - start);
 }
 
-unsigned long long time_now(void)
+unsigned long long	time_now(void)
 {
-    struct timeval now;
+	struct timeval	now;
 
-    gettimeofday(&now, NULL);
-    return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
+	gettimeofday(&now, NULL);
+	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
 }
 
-void sleepu(unsigned long long end)
+void	sleepu(unsigned long long end)
 {
-    while (time_now() < end)
-        usleep(10);
+	while (time_now() < end)
+		usleep(10);
 }
