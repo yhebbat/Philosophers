@@ -27,8 +27,6 @@ t_philo	*init_philo(t_args *args)
 		philo[i].philo_id = i;
 		philo[i].nb_of_meals = 0;
 		philo[i].eat = 0;
-		//philo[i].start = 0;
-		//philo[i].last_time_eat = 0;
 		philo[i].last_time_eat = time_now();
 		philo[i].start = philo->last_time_eat;
 	}

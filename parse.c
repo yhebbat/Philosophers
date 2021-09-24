@@ -27,6 +27,8 @@ int	parsing(int ac, char **av, t_args *args)
 	{
 		args->all = 0;
 		args->number_philo = ft_atoi(av[1]);
+		if (args->number_philo == 0)
+			return (0);
 		args->time_die = ft_atoi(av[2]);
 		args->time_eat = ft_atoi(av[3]);
 		args->time_sleep = ft_atoi(av[4]);

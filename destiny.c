@@ -34,7 +34,7 @@ void	destiny(t_args	*args, t_philo	*philo)
 				break ;
 			if (philo[i].eat == 0
 				&& time_passed(philo[i].last_time_eat)
-				>= (unsigned long)args->time_die + 5)
+				> (unsigned long)args->time_die)
 			{
 				print(&philo[i], DIE, time_passed(philo[i].start));
 				k = 0;
