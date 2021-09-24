@@ -20,6 +20,7 @@ typedef struct s_args
 	long				time_eat;
 	long				time_sleep;
 	long				num_meal;
+	int					all;
 	unsigned long long	current_time;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		write;

@@ -9,7 +9,7 @@ int	ft_checkmeals(t_args *args, t_philo *philo, int *k)
 			*k = 0;
 			return (1);
 		}
-		if (philo->nb_of_meals == args->num_meal && philo->eat == 0)
+		if (args->all == args->number_philo && philo->eat == 0)
 		{
 			*k = 0;
 			return (1);
@@ -34,7 +34,7 @@ void	destiny(t_args	*args, t_philo	*philo)
 				break ;
 			if (philo[i].eat == 0
 				&& time_passed(philo[i].last_time_eat)
-				>= (unsigned long)args->time_die)
+				>= (unsigned long)args->time_die + 5)
 			{
 				print(&philo[i], DIE, time_passed(philo[i].start));
 				k = 0;
