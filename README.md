@@ -1,5 +1,5 @@
 # philo
-
+sujet: https://cdn.intra.42.fr/pdf/pdf/31024/en.subject.pdf
 ## Threads:
 
 Un **thread***(Fil ou encore Fil d'exécution)* est une portion de code *(fonction)* qui se déroule en parallèle au thread principal (aussi appelé *main*). Ce principe est un peu semblable à la fonction **[fork](https://man.developpez.com/man2/fork.2.php)** sur Linux par exemple sauf que nous ne faisons pas de copie du processus père, nous définissons des fonctions qui vont se lancer en même temps que le processus, ce qui permet de faire de la programmation multitâche. Le but est donc de permettre au programme de réaliser plusieurs actions au même moment (imaginez un programme qui fait un gros calcul et une barre de progression qui avance en même temps).On peut également considérer un thread comme un processus allégé pour mieux imager le tout ! En comparaison des threads, un fork prend en moyenne 30 fois plus de temps à faire !
